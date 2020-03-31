@@ -1,0 +1,19 @@
+package rules
+
+import com.zeti.drools.entity.Commodity;
+import java.math.BigDecimal;
+
+rule "rule_01"
+    when
+        $name:String()
+    then
+        System.err.println("hello " + $name);
+end
+
+rule "rule_02"
+    when $commodity : Commodity(price.compareTo(new BigDecimal("1000")) > 0)
+
+    then
+    System.err.println("优惠价格: 300");
+
+end

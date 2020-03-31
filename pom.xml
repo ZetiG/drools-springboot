@@ -65,6 +65,16 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+<!--        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>META-INF/kmodule.xml</include>
+&lt;!&ndash;                    <include>com/site/myapp/checks/departure/Departure.drl</include>&ndash;&gt;
+                </includes>
+                <targetPath>.</targetPath>
+            </resource>
+        </resources>-->
     </build>
 
 </project>

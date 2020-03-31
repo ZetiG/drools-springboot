@@ -37,4 +37,11 @@ public class DroolsController {
         kieSession.fireAllRules();
     }
 
+    @GetMapping("/")
+    public void droolsRule2() {
+        kieSession.insert("Tom");
+        kieSession.fireAllRules();
+    }
+
+
 }

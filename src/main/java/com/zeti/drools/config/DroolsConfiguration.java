@@ -28,7 +28,7 @@ import java.nio.charset.Charset;
 @Configuration
 public class DroolsConfiguration {
 
-    private static final String RULE_PATH = "droolsRules/";
+    private static final String RULE_PATH = "rules/";
 
     private final KieServices kieServices = KieServices.Factory.get();
 
@@ -42,11 +42,10 @@ public class DroolsConfiguration {
     public KieFileSystem kieFileSystem() throws IOException {
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
         ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = patternResolver.getResources(RULE_PATH);
+        Resource[] resources = patternResolver.getResources("classpath*:" + RULE_PATH + "**/*.*");
         for (Resource resource : resources) {
-            String ruleFile;
-            ruleFile = RULE_PATH + resource.getFilename();
-            log.info("rule-file:{}", resource);
+            String ruleFile = RULE_PATH + resource.getFilename();
+            log.info("rule-file=>>>:{}", resource);
             kieFileSystem.write(ResourceFactory.newClassPathResource(ruleFile,
                     Charset.defaultCharset().name()));
         }
