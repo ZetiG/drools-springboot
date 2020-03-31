@@ -5,6 +5,8 @@ import com.zeti.drools.entity.Commodity;
 import com.zeti.drools.service.DroolsService;
 import lombok.extern.slf4j.Slf4j;
 import org.kie.api.runtime.KieSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ import java.math.BigDecimal;
 @RequestMapping("/drools")
 public class DroolsController {
 
+    private static Logger logger = LoggerFactory.getLogger(DroolsController.class);
+
     @Resource
     private DroolsService droolsService;
 
@@ -31,10 +35,12 @@ public class DroolsController {
     private KieSession kieSession;
 
     @GetMapping("/{money}")
-    public void droolsRule(@PathVariable String money) {
+    public Object droolsRule(@PathVariable String money) {
         Commodity commodity = droolsService.selectDiscount(new BigDecimal(money));
+        kieSession.setGlobal("logger", logger);
         kieSession.insert(commodity);
         kieSession.fireAllRules();
+        return commodity;
     }
 
     @GetMapping("/")

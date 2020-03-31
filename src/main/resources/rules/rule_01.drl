@@ -1,7 +1,10 @@
 package rules
 
 import com.zeti.drools.entity.Commodity;
-import java.math.BigDecimal;
+import java.math.BigDecimal
+import org.slf4j.LoggerFactory;
+
+global org.slf4j.Logger logger
 
 rule "rule_01"
     when
@@ -10,10 +13,35 @@ rule "rule_01"
         System.err.println("hello " + $name);
 end
 
-rule "rule_02"
-    when $commodity : Commodity(price.compareTo(new BigDecimal("1000")) > 0)
-
+rule "discount_01"
+    when
+        $commodity : Commodity(price.compareTo(new BigDecimal("500.00")) < 0)
     then
-    System.err.println("优惠价格: 300");
-
+        BigDecimal discount = BigDecimal.ZERO;
+        discountPrice(discount, $commodity);
+        logger.info("优惠金额: {}", discount);
 end
+
+rule "discount_02"
+    when
+        $commodity : Commodity(price.compareTo(new BigDecimal("500.00")) >= 0, price.compareTo(new BigDecimal("1000.00")) < 0)
+    then
+        BigDecimal discount = new BigDecimal("100.00");
+        discountPrice(discount, $commodity);
+        logger.info("优惠金额: {}", discount);
+end
+
+rule "discount_03"
+    when
+        $commodity : Commodity(price.compareTo(new BigDecimal("1000.00")) >= 0)
+    then
+        BigDecimal discount = new BigDecimal("300.00");
+        discountPrice(discount, $commodity);
+        logger.info("优惠金额: {}", discount);
+end
+
+function void discountPrice(BigDecimal discount, Commodity commodity) {
+        BigDecimal price = commodity.getPrice();
+        commodity.setDiscount(discount);
+        commodity.setPrice(price.subtract(discount));
+}

@@ -17,7 +17,7 @@ public class DroolsServiceImpl implements DroolsService {
     @Override
     public Commodity selectDiscount(BigDecimal price) {
         Commodity commodity = new Commodity();
-        commodity.setName("商品1");
+        commodity.setName("商品A");
         commodity.setPrice(price);
         return commodity;
     }
