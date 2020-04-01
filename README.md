@@ -1,11 +1,11 @@
-#规则引擎
+# 规则引擎
 
-###版本号
+### 版本号
 spring-boot-starter-parent.version  2.1.9.RELEASE  
 drools-core.version                 7.24.0.Final  
 kie-spring.version                  7.24.0.Final
 
-###基本格式
+### 基本格式
 ```
 package rules #虚拟包名，不一定需要与物理存在的包名一致(最好一致,否则启动会有warning)
 
@@ -27,14 +27,14 @@ end
 ```
 
 
-###规则介绍
-####约束连接符
+### 规则介绍
+#### 约束连接符
 <pre>"&&"(and)  "||"(or)  ","(and)</pre>
 <pre>优先级: '&&' > '||' > ','  </pre>
 <pre>且:','不能和 '&&' '||'一起使用 </pre>
 
 
-####比较符
+#### 比较符
 `>、>=、<、<=、= =、!=、contains、not contains、memberof、not memberof、matches、not matches`
 
 ```drools
