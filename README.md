@@ -6,7 +6,7 @@ drools-core.version                 7.24.0.Final
 kie-spring.version                  7.24.0.Final
 
 ###基本格式
-```drools
+```
 package rules #虚拟包名，不一定需要与物理存在的包名一致(最好一致,否则启动会有warning)
 
 import java.math.BigDecimal
