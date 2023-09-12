@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <lombok.version>1.18.12</lombok.version>
-        <drools.version>7.24.0.Final</drools.version>
+        <drools.version>7.69.0.Final</drools.version>
         <kie.version>7.24.0.Final</kie.version>
     </properties>
 
